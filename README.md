@@ -15,7 +15,7 @@ The camera stream stays active, but the stage image is frozen between calls to *
 2. Open the Extensions panel and choose the custom-extension option.
 3. Load this URL:
 
-   `https://raw.githubusercontent.com/CubeHub-studio/Gandi-LAGBENDING/main/lag-bending.js`
+   `https://cubehub-studio.github.io/Gandi-LAGBENDING/lag-bending.js`
 
 4. Add the **LAG BENDING** blocks to your project.
 
