@@ -36,8 +36,10 @@
     }
 
     createStageCanvas() {
+      // Gandi 3 exposes stage overlays to URL-loaded (non-sandbox) extensions.
+      // Feature-detect the API instead of guessing from an editor version.
       const stage = Scratch.gandi?.stage;
-      if (!stage || typeof stage.addOverlay !== 'function') {
+      if (typeof stage?.addOverlay !== 'function') {
         throw new Error('LAG BENDING needs Gandi 3 stage overlays.');
       }
 
@@ -61,6 +63,7 @@
       this.canvas = document.createElement('canvas');
       this.canvas.width = width;
       this.canvas.height = height;
+      this.canvas.style.display = 'block';
       this.canvas.style.position = 'absolute';
       this.canvas.style.inset = '0';
       this.canvas.style.width = '100%';
@@ -121,7 +124,10 @@
 
           this.video.addEventListener('loadeddata', onReady, { once: true });
           this.video.addEventListener('error', onError, { once: true });
-          this.video.play().catch(reject);
+          this.video.play().catch((error) => {
+            cleanup();
+            reject(error);
+          });
         });
 
         await this.video.play();
