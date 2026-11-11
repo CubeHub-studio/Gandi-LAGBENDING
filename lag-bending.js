@@ -78,7 +78,6 @@
     async enableCamera() {
       if (this.startingCamera) return;
       if (this.stream && this.video && this.video.readyState >= 2) {
-        this.captureCurrentFrame();
         return;
       }
 
